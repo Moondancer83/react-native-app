@@ -1,28 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React, {useState} from 'react';
-import {StatusBar, StyleSheet, Text, TouchableOpacity, View,} from 'react-native';
+import {StatusBar, Text, TouchableOpacity, View,} from 'react-native';
+import {style} from "./App.style";
 
 const App = () => {
   const [count, setCount] = useState(0);
 
   return (
     <>
-      <StatusBar barStyle="default" />
+      <StatusBar barStyle="light-content" />
       <View
-        style={{
-          flex: 1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}>
+        style={style.view}>
         <TouchableOpacity onPress={() => {setCount(count + 1)}} style={style.button}>
           <Text style={style.buttonText}>PRESS ME</Text>
         </TouchableOpacity>
@@ -32,23 +19,5 @@ const App = () => {
     </>
   );
 };
-
-const style = StyleSheet.create({
-  button: {
-    padding: 10,
-    borderWidth: 3,
-    borderRadius: 5,
-    backgroundColor: "lightgreen",
-  },
-  buttonText: {
-    fontSize: 48,
-    fontWeight: "bold"
-  },
-  counterText: {
-    color: "red",
-    marginTop: 40,
-    fontSize: 36
-  }
-});
 
 export default App;
