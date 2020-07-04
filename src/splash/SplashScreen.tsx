@@ -1,9 +1,9 @@
 import React from "react";
-import {Text, View} from "react-native";
+import {Image, View} from "react-native";
 import {StackNavigationProp} from "@react-navigation/stack";
 
-import {RootStackParamList} from "../RouteStackParamList";
-import {style} from "../App.style";
+import {RootStackParamList} from "../routes/RouteStackParamList";
+import {style} from "./SplashScreen.style";
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, 'Splash'>
@@ -12,15 +12,12 @@ interface Props {
 export default function SplashScreen(props: Props) {
 
   setTimeout(() => {
-    props.navigation.navigate("Counter");
+    props.navigation.navigate("Search");
   }, 1000);
 
-  const title = {...style.counterText, fontSize: 48, fontWeight: "bold" as "bold"}
   return (
     <View style={style.view}>
-      <Text style={title}>NDRV</Text>
-      <Text style={style.counterText}>Mobile Challenge</Text>
-
+      <Image style={{width: 200, height: 200}} source={{uri: "https://avatars0.githubusercontent.com/u/17519026?s=400&u=7bccc5b9436aaccfe4374fd56ca221f3f1558674&v=4"}}/>
     </View>
   );
 }

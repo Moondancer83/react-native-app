@@ -2,6 +2,7 @@ import {StyleSheet} from "react-native";
 
 export const style = StyleSheet.create({
   view: {
+    backgroundColor: "black",
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
@@ -21,7 +22,7 @@ export const style = StyleSheet.create({
     color: "black"
   },
   counterText: {
-    color: "orange",
+    color: "yellow",
     marginTop: 40,
     fontSize: 36
   }
