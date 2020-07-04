@@ -7,15 +7,19 @@ export const style = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center"
   },
+  buttonContainer: {
+    margin: 20
+  },
   button: {
     padding: 10,
     borderWidth: 3,
-    borderRadius: 5,
+    borderRadius: 10,
     backgroundColor: "lightgreen",
   },
   buttonText: {
     fontSize: 48,
-    fontWeight: "bold"
+    fontWeight: "bold",
+    color: "black"
   },
   counterText: {
     color: "yellow",
