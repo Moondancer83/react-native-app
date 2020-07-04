@@ -1,24 +1,24 @@
-import React, {useState} from 'react';
-import {Button, StatusBar, Text, TouchableHighlight, View,} from 'react-native';
-import {style} from "./App.style";
+import 'react-native-gesture-handler';
+import React from 'react';
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
+
+import SplashScreen from "./splash/SplashScreen";
+import CounterView from "./counter/CounterView";
+import {RootStackParamList} from "./RouteStackParamList";
+import ResultScreen from "./counter/ResultScreen";
+
+const Stack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <StatusBar barStyle="light-content" />
-      <View
-        style={style.view}>
-        <View style={style.buttonContainer}>
-          <TouchableHighlight style={style.button}>
-            <Button title={"PRESS ME"} onPress={() => {setCount(count + 1)}} color={"black"} />
-          </TouchableHighlight>
-        </View>
-        <Text style={style.counterText}>{count}</Text>
-
-      </View>
-    </>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName={"Splash"} headerMode={"screen"}>
+        <Stack.Screen name={"Splash"} component={SplashScreen} options={{headerShown: false}}/>
+        <Stack.Screen name={"Counter"} component={CounterView} options={{headerShown: false}}/>
+        <Stack.Screen name={"Results"} component={ResultScreen}/>
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
