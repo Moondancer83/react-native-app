@@ -1,34 +1,76 @@
-import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 
 import {RootStackParamList} from '../routes/RouteStackParamList';
 import ScreenFrame from './ScreenFrame';
+import {getHistoricalData, HistoryData} from './service/stockFacade';
+import HistoryItem from './HistoryItem';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Detail'>;
 }
 
 export default function DetailScreen(props: Props) {
+  const [history, setHistory] = useState<Array<HistoryData>>([]);
   const {stock} = props.route.params;
-  return (
-    <ScreenFrame barStyle={'light-content'}>
-      <View>
-        <Text>{stock.symbol}</Text>
-        <Text>{stock.name}</Text>
-        <Text>{stock.priceCurrent}</Text>
 
-        <Text>Open {stock.priceOpening}</Text>
-        <Text>High {stock.priceHeight}</Text>
-        <Text>Low {stock.priceLow}</Text>
+  async function loadHistory() {
+    console.log('DetailScreen.load');
+    const data: {
+      error: boolean;
+      history: Array<HistoryData>;
+    } = await getHistoricalData(stock.symbol);
+    console.log('DetailScreen.load', data);
+    setHistory(data.history);
+  }
+
+  useEffect(() => {
+    loadHistory();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
+    <>
+      <ScreenFrame barStyle={'light-content'} />
+      <View style={{backgroundColor: 'black'}}>
+        <Text style={{color: 'white'}}>{stock.symbol}</Text>
+        <Text style={{color: 'white'}}>{stock.name}</Text>
+        <Text style={{color: 'white'}}>${stock.priceCurrent}</Text>
+
+        <Text style={{color: 'white'}}>Open {stock.priceOpening}</Text>
+        <Text style={{color: 'white'}}>High {stock.priceHeight}</Text>
+        <Text style={{color: 'white'}}>Low {stock.priceLow}</Text>
+
         <View
           style={{
-            borderBottomColor: 'black',
-            borderBottomWidth: StyleSheet.hairlineWidth,
-          }}
-        />
-        <Text>graph goes here ({Object.keys(stock.history).length})</Text>
+            borderTopColor: 'white',
+            borderTopWidth: StyleSheet.hairlineWidth,
+            marginTop: 20,
+            paddingTop: 20,
+          }}>
+          {history.length ? (
+            <ScrollView>
+              {history.map((item: HistoryData) => (
+                <HistoryItem
+                  key={item.date}
+                  date={item.date}
+                  value={item.value}
+                  color={'white'}
+                />
+              ))}
+            </ScrollView>
+          ) : (
+            <Text
+              style={{
+                color: 'white',
+                fontWeight: 'bold',
+                textTransform: 'uppercase',
+              }}>
+              graph goes here
+            </Text>
+          )}
+        </View>
       </View>
-    </ScreenFrame>
+    </>
   );
 }

@@ -4,6 +4,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 
 import {Stock} from '../routes/Stock';
 import {RootStackParamList} from '../routes/RouteStackParamList';
+import {searchStock} from './service/stockFacade';
 import ScreenFrame from './ScreenFrame';
 import {style} from './Screen.style';
 
@@ -14,6 +15,7 @@ interface Props {
 export default function SearchScreen(props: Props) {
   const [symbol, setSymbol] = useState<string>();
   const [error, setError] = useState<boolean>(false);
+
   return (
     <ScreenFrame>
       <View style={style.view}>
@@ -25,7 +27,10 @@ export default function SearchScreen(props: Props) {
         <Text>Enter Ticker Symbol</Text>
         <TextInput
           editable={true}
-          onChangeText={(text) => setSymbol(text)}
+          onChangeText={(text) => {
+            setSymbol(text);
+            setError(false);
+          }}
           style={{
             width: '80%',
             height: 40,
@@ -36,25 +41,13 @@ export default function SearchScreen(props: Props) {
         />
         <Button
           title={'GO'}
-          onPress={() => {
-            if (
-              !symbol ||
-              (symbol && (symbol.length < 3 || symbol.length > 4))
-            ) {
+          onPress={async () => {
+            const result = await searchStock(symbol);
+            if (result.error || result.stock == null) {
               setError(true);
             } else {
               setError(false);
-              const stock: Stock = {
-                symbol: symbol || '',
-                name: 'Apple Inc',
-                priceCurrent: 276.1,
-                priceOpening: 273.6,
-                priceHeight: 273.6,
-                priceLow: 273.6,
-                history: {
-                  '2020.05.04.': 265.4,
-                },
-              };
+              const stock: Stock = result.stock;
               props.navigation.navigate('Detail', {stock});
             }
           }}
