@@ -5,5 +5,5 @@ export interface Stock {
   priceOpening: number;
   priceHeight: number;
   priceLow: number;
-  history: {[date: string]: number}
+  history: {[date: string]: number};
 }
