@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 
 import {RootStackParamList} from '../routes/RouteStackParamList';
 import ScreenFrame from './ScreenFrame';
 import {getHistoricalData, HistoryData} from './service/stockFacade';
-import HistoryItem from './HistoryItem';
+import HistoryChart from './HistoryChart';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Detail'>;
@@ -48,27 +48,7 @@ export default function DetailScreen(props: Props) {
             marginTop: 20,
             paddingTop: 20,
           }}>
-          {history.length ? (
-            <ScrollView>
-              {history.map((item: HistoryData) => (
-                <HistoryItem
-                  key={item.date}
-                  date={item.date}
-                  value={item.value}
-                  color={'white'}
-                />
-              ))}
-            </ScrollView>
-          ) : (
-            <Text
-              style={{
-                color: 'white',
-                fontWeight: 'bold',
-                textTransform: 'uppercase',
-              }}>
-              graph goes here
-            </Text>
-          )}
+          <HistoryChart history={history} />
         </View>
       </View>
     </>
