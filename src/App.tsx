@@ -5,9 +5,9 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import {RootStackParamList} from './routes/RouteStackParamList';
 import SplashScreen from './splash/SplashScreen';
-import SearchScreen from './stock/SearchScreen';
+import SearchScreen from './search/SearchScreen';
 import DetailScreen from './stock/DetailScreen';
-import BackImage from './core/BackImage';
+import BackImage from './screen/BackImage';
 
 const Stack = createStackNavigator<RootStackParamList>();
 
