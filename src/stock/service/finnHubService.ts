@@ -35,10 +35,14 @@ export async function getProfile(symbol: string): Promise<Profile> {
     symbol +
     '&token=' +
     hubSetup.apiKey;
-  const response: Response = await fetch(url + hubSetup.apiKey);
+  const response: Response = await fetch(url);
+
+  console.log(url, 'GET', response.status);
 
   if (response.ok) {
-    return response.json();
+    let json = await response.json();
+    console.log('PROFILE', json);
+    return json;
   } else {
     throw new Error(response.statusText);
   }

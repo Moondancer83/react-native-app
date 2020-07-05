@@ -1,6 +1,6 @@
 import {Stock} from '../../routes/Stock';
 import {SymbolDTO} from './finnHubService';
-import * as finnHubService from './mock/finnHubService.mock';
+import * as finnHubService from './finnHubService';
 
 interface StockDTO {
   error: boolean;
@@ -11,17 +11,30 @@ export async function getSymbols(): Promise<Array<SymbolDTO>> {
   return finnHubService.getSymbols();
 }
 
+async function getSymbol(symbol: string): Promise<SymbolDTO> {
+  const symbols = await getSymbols();
+  console.log('SYMBOLS', symbols);
+  const filtered = symbols.filter((s) => s.symbol === symbol);
+  console.log('FILTERED', filtered);
+  if (filtered.length === 1) {
+    return filtered[0];
+  } else {
+    return Promise.reject();
+  }
+}
+
 export async function searchStock(symbol?: string): Promise<StockDTO> {
   if (symbol) {
     try {
-      const profile = await finnHubService.getProfile(symbol);
+      const profile = await getSymbol(symbol);
+      console.log('SYMBOL', profile);
       const quote = await finnHubService.getQuoteData(symbol);
 
       console.log(symbol, 'QUOTE', quote);
 
       const stock: Stock = {
-        symbol: profile.ticker,
-        name: profile.name,
+        symbol: profile.symbol,
+        name: profile.description,
         priceCurrent: quote.c,
         priceOpening: quote.o,
         priceHeight: quote.h,
@@ -30,6 +43,7 @@ export async function searchStock(symbol?: string): Promise<StockDTO> {
 
       return {error: false, stock};
     } catch (e) {
+      console.log(e);
       return {error: true, stock: null};
     }
   } else {
