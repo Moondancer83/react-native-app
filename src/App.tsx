@@ -7,7 +7,7 @@ import {RootStackParamList} from './routes/RouteStackParamList';
 import SplashScreen from './splash/SplashScreen';
 import SearchScreen from './stock/SearchScreen';
 import DetailScreen from './stock/DetailScreen';
-import BackImage from './stock/BackImage';
+import BackImage from './core/BackImage';
 
 const Stack = createStackNavigator<RootStackParamList>();
 

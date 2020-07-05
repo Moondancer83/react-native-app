@@ -5,7 +5,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {Stock} from '../routes/Stock';
 import {RootStackParamList} from '../routes/RouteStackParamList';
 import {searchStock} from './service/stockFacade';
-import ScreenFrame from './ScreenFrame';
+import ScreenFrame from '../core/ScreenFrame';
 import {style} from './Screen.style';
 
 interface Props {

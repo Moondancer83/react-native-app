@@ -3,7 +3,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 
 import {RootStackParamList} from '../routes/RouteStackParamList';
-import ScreenFrame from './ScreenFrame';
+import ScreenFrame from '../core/ScreenFrame';
 import {getHistoricalData, HistoryData} from './service/stockFacade';
 import HistoryChart from './HistoryChart';
 
