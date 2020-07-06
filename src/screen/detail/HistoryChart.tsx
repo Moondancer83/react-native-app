@@ -3,15 +3,28 @@ import {Dimensions, Text, View} from 'react-native';
 import {LineChart} from 'react-native-line-chart';
 
 import {HistoryData} from '../../service/stockFacade';
+import {baseStyles, colors} from '../BaseStyles';
 
 interface Props {
   history: Array<HistoryData>;
+  height: number;
 }
 
 export default function HistoryChart(props: Props) {
+  console.log('DATA', props.history.length);
+  console.log('HEIGHT', props.height);
+
   if (props.history.length) {
     return (
-      <View>
+      <>
+        <Text
+          style={{
+            ...baseStyles.body,
+            color: colors.gray,
+            textAlign: 'center',
+          }}>
+          Closing values over the last year
+        </Text>
         <LineChart
           data={{
             labels: props.history.map((item) => item.date),
@@ -21,35 +34,32 @@ export default function HistoryChart(props: Props) {
               },
             ],
           }}
-          width={Dimensions.get('window').width - 16} // from react-native
-          height={220}
+          width={Dimensions.get('window').width} // from react-native
+          height={props.height}
           chartConfig={{
-            // backgroundColor: 'black',
-            // backgroundGradientFrom: '#fb8c00',
-            // backgroundGradientTo: '#ffa726',
-            // decimalPlaces: 2, // optional, defaults to 2dp
-            color: (opacity = 1) => `rgba(255, 255, 255, ${opacity})`,
-            // style: {
-            //   borderRadius: 16
-            // }
+            fillShadowGradient: 'white',
+            fillShadowGradientOpacity: 1,
+            color: () => 'rgba(255, 255, 255, 1)',
           }}
           bezier
-          style={{
-            marginRight: 8,
-          }}
         />
-      </View>
+      </>
     );
   } else {
     return (
-      <View>
+      <View
+        style={{
+          flex: 1,
+          ...baseStyles.view,
+        }}>
         <Text
           style={{
-            color: 'white',
+            textAlign: 'center',
+            color: colors.gray,
             fontWeight: 'bold',
             textTransform: 'uppercase',
           }}>
-          graph goes here
+          graph is loading
         </Text>
       </View>
     );

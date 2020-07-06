@@ -13,6 +13,7 @@ export async function getSymbols(): Promise<Array<SymbolDTO>> {
 
 async function getSymbol(symbol: string): Promise<SymbolDTO> {
   const symbols = await getSymbols();
+  console.log('SYMBOLS', symbols);
   const filtered = symbols.filter((s) => s.symbol === symbol);
   if (filtered.length === 1) {
     return filtered[0];

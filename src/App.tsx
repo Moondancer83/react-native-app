@@ -33,6 +33,7 @@ const App = () => {
             headerBackImage: BackImage,
             headerStyle: {
               backgroundColor: 'black',
+              shadowColor: 'transparent',
             },
             headerTitle: '',
           }}
