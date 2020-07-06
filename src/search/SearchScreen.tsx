@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Text, TextInput, TouchableNativeFeedback, View} from 'react-native';
+import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {Stock} from '../routes/Stock';
@@ -16,13 +16,11 @@ interface Props {
 export default function SearchScreen(props: Props) {
   const [symbol, setSymbol] = useState<string>();
   const [error, setError] = useState<boolean>(false);
-  const [inputStyle, setInputStyle] = useState(style.input);
-  const [errorStyle, setErrorStyle] = useState(style.error);
-  const [buttonStyle, setButtonStyle] = useState(style.buttonDisabled);
+  const [focus, setFocus] = useState<boolean>(false);
 
   return (
     <ScreenFrame>
-      <View style={errorStyle}>
+      <View style={error ? style.errorShow : style.error}>
         <Text style={style.errorText}>
           {error ? 'This is not a valid Ticker Symbol' : null}
         </Text>
@@ -33,39 +31,30 @@ export default function SearchScreen(props: Props) {
           editable={true}
           onChangeText={(text) => {
             setSymbol(text);
-            setErrorStyle(style.error);
             setError(false);
-            setInputStyle(style.inputFocused);
-            if (text) {
-              setButtonStyle(style.button);
-            } else {
-              setButtonStyle(style.buttonDisabled);
-            }
           }}
-          onFocus={() => setInputStyle(style.inputFocused)}
-          style={inputStyle}
+          onFocus={() => setFocus(true)}
+          style={
+            error ? style.inputError : focus ? style.inputFocused : style.input
+          }
         />
       </View>
-      <View style={buttonStyle}>
-        <TouchableNativeFeedback disabled={!symbol}>
-          <Text
-            style={style.buttonText}
-            onPress={async () => {
-              const result = await searchStock(symbol);
-              if (result.error || result.stock == null) {
-                setError(true);
-                setErrorStyle(style.errorShow);
-                setInputStyle(style.inputError);
-              } else {
-                setError(false);
-                setInputStyle(style.inputFocused);
-                const stock: Stock = result.stock;
-                props.navigation.navigate('Detail', {stock});
-              }
-            }}>
-            GO
-          </Text>
-        </TouchableNativeFeedback>
+      <View>
+        <TouchableOpacity
+          disabled={!symbol}
+          onPress={async () => {
+            const result = await searchStock(symbol);
+            if (result.error || result.stock == null) {
+              setError(true);
+            } else {
+              setError(false);
+              const stock: Stock = result.stock;
+              props.navigation.navigate('Detail', {stock});
+            }
+          }}
+          style={symbol ? style.button : style.buttonDisabled}>
+          <Text style={style.buttonText}>GO</Text>
+        </TouchableOpacity>
       </View>
     </ScreenFrame>
   );
