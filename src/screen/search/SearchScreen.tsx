@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {Text, TextInput, TouchableOpacity, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {Stock} from '../routes/Stock';
-import {RootStackParamList} from '../routes/RouteStackParamList';
-import {searchStock} from '../stock/service/stockFacade';
-import ScreenFrame from '../screen/ScreenFrame';
+import {Stock} from '../../service/Stock';
+import {RootStackParamList} from '../../routes/RouteStackParamList';
+import {searchStock} from '../../service/stockFacade';
+import ScreenFrame from '../ScreenFrame';
 import {style} from './SearchScreen.style';
-import {baseStyles} from '../screen/BaseStyles';
+import {baseStyles} from '../BaseStyles';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, 'Search'>;

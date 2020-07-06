@@ -2,7 +2,7 @@ import React from 'react';
 import {Image, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
-import {RootStackParamList} from '../routes/RouteStackParamList';
+import {RootStackParamList} from '../../routes/RouteStackParamList';
 import {style} from './SplashScreen.style';
 
 interface Props {

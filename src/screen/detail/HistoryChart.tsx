@@ -2,7 +2,7 @@ import React from 'react';
 import {Dimensions, Text, View} from 'react-native';
 import {LineChart} from 'react-native-line-chart';
 
-import {HistoryData} from './service/stockFacade';
+import {HistoryData} from '../../service/stockFacade';
 
 interface Props {
   history: Array<HistoryData>;

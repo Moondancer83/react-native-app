@@ -1,6 +1,6 @@
-import {Stock} from '../../routes/Stock';
-import {SymbolDTO} from '../../finnhub/FinnHubApi';
-import finnHubService from '../../finnhub/finnHubService';
+import {Stock} from './Stock';
+import {SymbolDTO} from './finnhub/FinnHubApi';
+import finnHubService from './finnhub/finnHubService';
 
 interface StockDTO {
   error: boolean;

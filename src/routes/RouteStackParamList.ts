@@ -1,4 +1,4 @@
-import {Stock} from './Stock';
+import {Stock} from '../service/Stock';
 
 export type RootStackParamList = {
   Splash: undefined;

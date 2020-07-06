@@ -1,5 +1,5 @@
 import {Dimensions, StyleSheet} from 'react-native';
-import {baseStyles, colors} from '../screen/BaseStyles';
+import {baseStyles, colors} from '../BaseStyles';
 
 const inputStyle = {
   width: '80%',
