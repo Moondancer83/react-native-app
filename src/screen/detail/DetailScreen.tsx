@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {RouteProp} from '@react-navigation/native';
 
 import {RootStackParamList} from '../../routes/RouteStackParamList';
@@ -53,14 +53,14 @@ export default function DetailScreen(props: Props) {
         </View>
       </View>
 
-      <View
+      <ScrollView
         style={style.history}
         onLayout={(event) => {
           const {height} = event.nativeEvent.layout;
           setViewHeight(height);
         }}>
         <HistoryChart history={history} height={viewHeight} />
-      </View>
+      </ScrollView>
     </ScreenFrame>
   );
 }
