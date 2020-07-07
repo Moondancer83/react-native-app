@@ -1,15 +1,13 @@
 import React, {PropsWithChildren} from 'react';
-import {Dimensions, SafeAreaView, StatusBar} from 'react-native';
+import {KeyboardAvoidingView, Platform, StatusBar} from 'react-native';
 
-interface Props {
-  barStyle?: 'default' | 'dark-content' | 'light-content';
-}
-
-export default function ScreenFrame<T>(props: PropsWithChildren<Props & T>) {
+export default function ScreenFrame<T>(props: PropsWithChildren<T>) {
   return (
-    <SafeAreaView style={{height: Dimensions.get('screen').height}}>
-      <StatusBar barStyle={props.barStyle || 'default'} />
+    <KeyboardAvoidingView
+      behavior={Platform.OS == 'ios' ? 'padding' : 'height'}
+      style={{flex: 1}}>
+      <StatusBar hidden={true} />
       {props.children}
-    </SafeAreaView>
+    </KeyboardAvoidingView>
   );
 }

@@ -32,7 +32,7 @@ export default function DetailScreen(props: Props) {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <ScreenFrame barStyle={'light-content'}>
+    <ScreenFrame>
       <View
         style={{
           backgroundColor: 'black',

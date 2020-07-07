@@ -37,7 +37,7 @@ export default function SearchScreen(props: Props) {
           style={
             error ? style.inputError : focus ? style.inputFocused : style.input
           }
-          placeholder={"VOO"}
+          placeholder={'VOO'}
           placeholderTextColor={colors.lightGray}
         />
       </View>
