@@ -1,26 +1,39 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {Image, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
+import {useNetInfo} from '@react-native-community/netinfo';
 
 import {RootStackParamList} from '../../routes/RouteStackParamList';
-import {style} from './SplashScreen.style';
 import {getSymbols} from '../../service/stockFacade';
 import {SymbolDTO} from '../../service/finnhub/FinnHubApi';
+import NoInternetScreen from '../no-internet/NoInternetScreen';
+import {style} from './SplashScreen.style';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, 'Splash'>;
 }
 
 export default function SplashScreen(props: Props) {
-  useEffect(() => {
-    load();
-  });
+  const netInfo = useNetInfo();
+  const [fallback, setFallback] = useState(false);
 
-  async function load() {
+  const load = useCallback(async () => {
     const symbols: Array<SymbolDTO> = await getSymbols();
     props.navigation.navigate('Search', {symbols});
-  }
+  }, [props.navigation]);
 
+  useEffect(() => {
+    if (netInfo.isInternetReachable) {
+      load();
+      setFallback(false);
+    } else {
+      setTimeout(() => setFallback(true), 1000);
+    }
+  }, [netInfo, fallback, load]);
+
+  if (fallback && !netInfo.isInternetReachable) {
+    return <NoInternetScreen />;
+  }
   return (
     <View style={style.view}>
       <Image
