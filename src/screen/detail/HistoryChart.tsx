@@ -3,7 +3,7 @@ import {Dimensions, Text, View} from 'react-native';
 import {LineChart} from 'react-native-line-chart';
 
 import {HistoryData} from '../../service/stockFacade';
-import {baseStyles, colors} from '../BaseStyles';
+import {style} from './HistoryChart.style';
 
 interface Props {
   history: Array<HistoryData>;
@@ -11,20 +11,10 @@ interface Props {
 }
 
 export default function HistoryChart(props: Props) {
-  console.log('DATA', props.history.length);
-  console.log('HEIGHT', props.height);
-
   if (props.history.length) {
     return (
       <>
-        <Text
-          style={{
-            ...baseStyles.body,
-            color: colors.gray,
-            textAlign: 'center',
-          }}>
-          Closing values over the last year
-        </Text>
+        <Text style={style.title}>Closing values over the last year</Text>
         <LineChart
           data={{
             labels: props.history.map((item) => item.date),
@@ -47,20 +37,8 @@ export default function HistoryChart(props: Props) {
     );
   } else {
     return (
-      <View
-        style={{
-          flex: 1,
-          ...baseStyles.view,
-        }}>
-        <Text
-          style={{
-            textAlign: 'center',
-            color: colors.gray,
-            fontWeight: 'bold',
-            textTransform: 'uppercase',
-          }}>
-          graph is loading
-        </Text>
+      <View style={style.placeholderView}>
+        <Text style={style.placeholder}>graph is loading</Text>
       </View>
     );
   }

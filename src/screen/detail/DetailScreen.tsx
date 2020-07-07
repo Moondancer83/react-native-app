@@ -6,7 +6,7 @@ import {RootStackParamList} from '../../routes/RouteStackParamList';
 import ScreenFrame from '../ScreenFrame';
 import {getHistoricalData, HistoryData} from '../../service/stockFacade';
 import HistoryChart from './HistoryChart';
-import {baseStyles, colors} from '../BaseStyles';
+import {style} from './DetailScreen.style';
 
 interface Props {
   route: RouteProp<RootStackParamList, 'Detail'>;
@@ -19,7 +19,6 @@ export default function DetailScreen(props: Props) {
   const {stock} = props.route.params;
 
   async function loadHistory() {
-    console.log('DetailScreen.load');
     const data: {
       error: boolean;
       history: Array<HistoryData>;
@@ -33,70 +32,31 @@ export default function DetailScreen(props: Props) {
 
   return (
     <ScreenFrame>
-      <View
-        style={{
-          backgroundColor: 'black',
-          paddingRight: 28,
-          paddingLeft: 28,
-          paddingBottom: 28,
-        }}>
-        <Text
-          style={{
-            ...baseStyles.body,
-            color: colors.white,
-            marginTop: 15,
-            marginBottom: 7,
-          }}>
-          {stock.symbol}
-        </Text>
-        <Text
-          style={{
-            ...baseStyles.title,
-            color: colors.white,
-            marginTop: 5,
-            marginBottom: 0,
-            textTransform: 'capitalize',
-          }}>
-          {stock.name}
-        </Text>
-        <Text
-          style={{...baseStyles.title, color: colors.white, marginBottom: 28}}>
-          ${stock.priceCurrent}
-        </Text>
+      <View style={style.quote}>
+        <Text style={style.symbol}>{stock.symbol}</Text>
+        <Text style={style.name}>{stock.name}</Text>
+        <Text style={style.currentPrice}>${stock.priceCurrent}</Text>
 
-        <View style={{display: 'flex', flexDirection: 'row'}}>
-          <View style={{flex: 1}}>
-            <Text style={{...baseStyles.body, color: colors.white}}>Open</Text>
-            <Text style={{...baseStyles.title2, color: colors.white}}>
-              {stock.priceOpening}
-            </Text>
+        <View style={style.table}>
+          <View style={style.cell}>
+            <Text style={style.label}>Open</Text>
+            <Text style={style.value}>{stock.priceOpening}</Text>
           </View>
-          <View style={{flex: 1}}>
-            <Text style={{...baseStyles.body, color: colors.white}}>High</Text>
-            <Text style={{...baseStyles.title2, color: colors.white}}>
-              {stock.priceHeight}
-            </Text>
+          <View style={style.cell}>
+            <Text style={style.label}>High</Text>
+            <Text style={style.value}>{stock.priceHeight}</Text>
           </View>
-          <View style={{flex: 1}}>
-            <Text style={{...baseStyles.body, color: colors.white}}>Low</Text>
-            <Text style={{...baseStyles.title2, color: colors.white}}>
-              {stock.priceLow}
-            </Text>
+          <View style={style.cell}>
+            <Text style={style.label}>Low</Text>
+            <Text style={style.value}>{stock.priceLow}</Text>
           </View>
         </View>
       </View>
 
       <View
-        style={{
-          flex: 1,
-          backgroundColor: colors.black,
-          borderTopColor: colors.gray,
-          borderTopWidth: 1,
-          paddingTop: 20,
-        }}
+        style={style.history}
         onLayout={(event) => {
           const {height} = event.nativeEvent.layout;
-          console.log('Measure HEIGHT', height);
           setViewHeight(height);
         }}>
         <HistoryChart history={history} height={viewHeight} />

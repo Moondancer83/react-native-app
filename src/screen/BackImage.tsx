@@ -1,11 +1,7 @@
 import React from 'react';
 import {Image} from 'react-native';
+import {style} from './BackImage.style';
 
 export default function () {
-  return (
-    <Image
-      source={require('./back3x.png')}
-      style={{width: 15, height: 15, marginLeft: 28}}
-    />
-  );
+  return <Image source={require('./back3x.png')} style={style.icon} />;
 }
