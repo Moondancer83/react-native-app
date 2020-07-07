@@ -11,21 +11,22 @@ export async function getSymbols(): Promise<Array<SymbolDTO>> {
   return finnHubService.getSymbols();
 }
 
-async function getSymbol(symbol: string): Promise<SymbolDTO> {
-  const symbols = await getSymbols();
+export function getSymbol(
+  symbols: Array<SymbolDTO>,
+  symbol?: string,
+): SymbolDTO | undefined {
   const filtered = symbols.filter((s) => s.symbol === symbol);
   if (filtered.length === 1) {
     return filtered[0];
   } else {
-    return Promise.reject();
+    return null;
   }
 }
 
-export async function searchStock(symbol?: string): Promise<StockDTO> {
-  if (symbol) {
+export async function searchStock(profile?: SymbolDTO): Promise<StockDTO> {
+  if (profile) {
     try {
-      const profile = await getSymbol(symbol);
-      const quote = await finnHubService.getQuoteData(symbol);
+      const quote = await finnHubService.getQuoteData(profile.symbol);
 
       const stock: Stock = {
         symbol: profile.symbol,

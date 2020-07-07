@@ -1,18 +1,25 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {Image, View} from 'react-native';
 import {StackNavigationProp} from '@react-navigation/stack';
 
 import {RootStackParamList} from '../../routes/RouteStackParamList';
 import {style} from './SplashScreen.style';
+import {getSymbols} from '../../service/stockFacade';
+import {SymbolDTO} from '../../service/finnhub/FinnHubApi';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, 'Splash'>;
 }
 
 export default function SplashScreen(props: Props) {
-  setTimeout(() => {
-    props.navigation.navigate('Search');
-  }, 1000);
+  useEffect(() => {
+    load();
+  });
+
+  async function load() {
+    const symbols: Array<SymbolDTO> = await getSymbols();
+    props.navigation.navigate('Search', {symbols});
+  }
 
   return (
     <View style={style.view}>
