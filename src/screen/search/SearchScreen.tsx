@@ -41,7 +41,7 @@ export default function SearchScreen(props: Props) {
     }
   }
 
-  async function onPress() {
+  async function submit() {
     const profile = getProfile();
     if (!profile) {
       return;
@@ -72,12 +72,13 @@ export default function SearchScreen(props: Props) {
           }
           placeholder={'VOO'}
           placeholderTextColor={colors.lightGray}
+          onSubmitEditing={submit}
         />
       </View>
       <View>
         <TouchableOpacity
           disabled={!symbol}
-          onPress={onPress}
+          onPress={submit}
           style={symbol ? style.button : style.buttonDisabled}>
           <Text style={style.buttonText}>GO</Text>
         </TouchableOpacity>
