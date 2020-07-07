@@ -6,10 +6,7 @@ export const style = StyleSheet.create({
     ...baseStyles.body,
     color: colors.gray,
     textAlign: 'center',
-  },
-  placeholderView: {
-    flex: 1,
-    ...baseStyles.view,
+    paddingTop: 50,
   },
   placeholder: {
     textAlign: 'center',

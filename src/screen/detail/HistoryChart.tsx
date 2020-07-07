@@ -1,5 +1,5 @@
 import React from 'react';
-import {Dimensions, Text, View} from 'react-native';
+import {Dimensions, Text} from 'react-native';
 import {LineChart} from 'react-native-line-chart';
 
 import {HistoryData} from '../../service/stockFacade';
@@ -24,7 +24,7 @@ export default function HistoryChart(props: Props) {
               },
             ],
           }}
-          width={Dimensions.get('window').width} // from react-native
+          width={Dimensions.get('window').width}
           height={props.height}
           chartConfig={{
             fillShadowGradient: 'white',
@@ -36,10 +36,6 @@ export default function HistoryChart(props: Props) {
       </>
     );
   } else {
-    return (
-      <View style={style.placeholderView}>
-        <Text style={style.placeholder}>graph is loading</Text>
-      </View>
-    );
+    return <Text style={style.placeholder}>graph is loading</Text>;
   }
 }

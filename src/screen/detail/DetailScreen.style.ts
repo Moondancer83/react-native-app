@@ -38,6 +38,6 @@ export const style = StyleSheet.create({
     backgroundColor: colors.black,
     borderTopColor: colors.gray,
     borderTopWidth: 1,
-    paddingTop: 20,
+    ...baseStyles.view,
   },
 });

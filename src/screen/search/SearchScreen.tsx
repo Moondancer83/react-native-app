@@ -28,7 +28,7 @@ export default function SearchScreen(props: Props) {
       <View style={style.inputSection}>
         <Text style={baseStyles.title2}>Enter Ticker Symbol</Text>
         <TextInput
-          autoCapitalize={"characters"}
+          autoCapitalize={'characters'}
           editable={true}
           onChangeText={(text) => {
             setSymbol(text);
