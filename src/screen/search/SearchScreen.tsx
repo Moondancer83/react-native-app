@@ -28,12 +28,14 @@ export default function SearchScreen(props: Props) {
       <View style={style.inputSection}>
         <Text style={baseStyles.title2}>Enter Ticker Symbol</Text>
         <TextInput
+          autoCapitalize={"characters"}
           editable={true}
           onChangeText={(text) => {
             setSymbol(text);
             setError(false);
           }}
           onFocus={() => setFocus(true)}
+          onBlur={() => setFocus(false)}
           style={
             error ? style.inputError : focus ? style.inputFocused : style.input
           }
