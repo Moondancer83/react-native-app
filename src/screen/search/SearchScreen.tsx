@@ -7,7 +7,7 @@ import {RootStackParamList} from '../../routes/RouteStackParamList';
 import {searchStock} from '../../service/stockFacade';
 import ScreenFrame from '../ScreenFrame';
 import {style} from './SearchScreen.style';
-import {baseStyles} from '../BaseStyles';
+import {baseStyles, colors} from '../BaseStyles';
 
 interface Props {
   navigation: StackNavigationProp<RootStackParamList, 'Search'>;
@@ -37,6 +37,8 @@ export default function SearchScreen(props: Props) {
           style={
             error ? style.inputError : focus ? style.inputFocused : style.input
           }
+          placeholder={"VOO"}
+          placeholderTextColor={colors.lightGray}
         />
       </View>
       <View>
