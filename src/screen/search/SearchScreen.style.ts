@@ -30,6 +30,10 @@ export const style = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.white,
   },
+  formControl: {
+    ...baseStyles.view,
+    width: '100%',
+  },
   input: {
     ...inputStyle,
     borderColor: colors.gray,

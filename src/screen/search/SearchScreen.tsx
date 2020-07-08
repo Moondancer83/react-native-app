@@ -57,23 +57,29 @@ export default function SearchScreen(props: Props) {
         </Text>
       </View>
       <View style={style.inputSection}>
-        <Text style={baseStyles.title2}>Enter Ticker Symbol</Text>
-        <TextInput
-          autoCapitalize={'characters'}
-          editable={true}
-          onChangeText={(text) => {
-            setSymbol(text);
-            setError(false);
-          }}
-          onFocus={() => setFocus(true)}
-          onBlur={() => setFocus(false)}
-          style={
-            error ? style.inputError : focus ? style.inputFocused : style.input
-          }
-          placeholder={'VOO'}
-          placeholderTextColor={colors.lightGray}
-          onSubmitEditing={submit}
-        />
+        <View style={style.formControl}>
+          <Text style={baseStyles.title2}>Enter Ticker Symbol</Text>
+          <TextInput
+            autoCapitalize={'characters'}
+            editable={true}
+            onChangeText={(text) => {
+              setSymbol(text);
+              setError(false);
+            }}
+            onFocus={() => setFocus(true)}
+            onBlur={() => setFocus(false)}
+            style={
+              error
+                ? style.inputError
+                : focus
+                ? style.inputFocused
+                : style.input
+            }
+            placeholder={'VOO'}
+            placeholderTextColor={colors.lightGray}
+            onSubmitEditing={submit}
+          />
+        </View>
       </View>
       <View>
         <TouchableOpacity
