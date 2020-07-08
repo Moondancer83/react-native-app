@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test NoInternetScreen against snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexDirection": "column",
+      "justifyContent": "center",
+      "padding": 10,
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "fontFamily": "Avenir Next",
+        "fontSize": 28,
+        "fontWeight": "600",
+        "marginBottom": 20,
+        "marginTop": -50,
+      }
+    }
+  >
+    No internet connection
+  </Text>
+  <Text
+    style={
+      Object {
+        "fontFamily": "Avenir Next",
+        "fontSize": 15,
+        "fontWeight": "500",
+      }
+    }
+  >
+    Application will load when device is connected to the internet.
+  </Text>
+</View>
+`;

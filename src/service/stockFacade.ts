@@ -19,7 +19,7 @@ export function getSymbol(
   if (filtered.length === 1) {
     return filtered[0];
   } else {
-    return null;
+    return undefined;
   }
 }
 

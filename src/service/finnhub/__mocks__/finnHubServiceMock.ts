@@ -1,7 +1,7 @@
-import {FinnHubService, HistoryDTO, QuoteDTO, SymbolDTO} from './FinnHubApi';
-import symbols from './mock/symbols.json';
-import quotes from './mock/quotes.json';
-import candles from './mock/candles.json';
+import {FinnHubService, HistoryDTO, QuoteDTO, SymbolDTO} from '../FinnHubApi';
+import symbols from './symbols.json';
+import quotes from './quotes.json';
+import candles from './candles.json';
 
 class FinnHibServiceMock implements FinnHubService {
   public async getCandleData(symbol: string): Promise<HistoryDTO> {
